@@ -104,7 +104,7 @@ var ProductCategoryRow = React.createClass({
 			null,
 			React.createElement(
 				'th',
-				{ colSpan: '2' },
+				{ colSpan: '2', className: 'text-center' },
 				this.props.category
 			)
 		);
@@ -152,7 +152,7 @@ var ProductTable = React.createClass({
 		});
 		return React.createElement(
 			'table',
-			null,
+			{ className: 'table' },
 			React.createElement(
 				'thead',
 				null,
@@ -187,13 +187,18 @@ var SearchBar = React.createClass({
 		return React.createElement(
 			'form',
 			null,
-			React.createElement('input', { type: 'text', placeholder: 'Search...' }),
+			React.createElement('input', { type: 'text', placeholder: 'Search...', className: 'form-control' }),
 			React.createElement(
-				'p',
-				null,
-				React.createElement('input', { type: 'checkbox' }),
-				' ',
-				'Only show products in stock'
+				'div',
+				{ className: 'checkbox' },
+				React.createElement(
+					'label',
+					null,
+					React.createElement('input', { type: 'checkbox' }),
+					' ',
+					' ',
+					' Only show products in stock'
+				)
 			)
 		);
 	}
@@ -214,7 +219,11 @@ var FilterableProductTable = React.createClass({
 
 var PRODUCTS = [{ category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }, { category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball' }, { category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball' }, { category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch' }, { category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5' }, { category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7' }];
 
-ReactDOM.render(React.createElement(FilterableProductTable, { products: PRODUCTS }), document.getElementById('container'));
+ReactDOM.render(React.createElement(
+	'div',
+	{ className: 'container' },
+	React.createElement(FilterableProductTable, { products: PRODUCTS })
+), document.getElementById('container'));
 
 },{"react":159,"react-dom":3}],3:[function(require,module,exports){
 'use strict';

@@ -5,7 +5,7 @@ var ProductCategoryRow = React.createClass({
 	render : function () {
 		return (
 			<tr>
-				<th colSpan='2'>
+				<th colSpan='2' className='text-center'>
 					{this.props.category}
 				</th>
 			</tr>
@@ -42,7 +42,7 @@ var ProductTable = React.createClass({
 			}
 		)
 		return (
-			<table>
+			<table className='table'>
 			    <thead>
 			        <tr>
 			            <th>Name</th>
@@ -59,14 +59,14 @@ var SearchBar = React.createClass({
 	render : function () {
 		return (
 			<form>
-				<input type='text' placeholder='Search...'/>
-				<p>
-					<input type='checkbox' />
-					{' '}
-					Only show products in stock
-				</p>
+			    <input type='text' placeholder='Search...' className='form-control'/>
+				<div className="checkbox">
+				    <label>
+						<input type='checkbox'/> {' '} Only show products in stock
+				    </label>
+				</div>
 			</form>
-		)
+		)		
 	}
 })
 
@@ -91,6 +91,8 @@ var PRODUCTS = [
 ];
 
 ReactDOM.render(
-	<FilterableProductTable products={PRODUCTS}/>,
+	<div className='container'>
+		<FilterableProductTable products={PRODUCTS}/>
+	</div>,
 	document.getElementById('container')
 );
