@@ -186,18 +186,33 @@ var ProductTable = React.createClass({
 var SearchBar = React.createClass({
 	displayName: 'SearchBar',
 
+	handleChange: function () {
+		this.props.onUserInput(this.refs.filterTextInput.value, this.refs.inStockOnlyInput.checked);
+	},
 	render: function () {
 		return React.createElement(
 			'form',
 			null,
-			React.createElement('input', { type: 'text', placeholder: 'Search...', className: 'form-control', value: this.props.filterText }),
+			React.createElement('input', {
+				type: 'text',
+				placeholder: 'Search...',
+				className: 'form-control',
+				value: this.props.filterText,
+				ref: 'filterTextInput',
+				onChange: this.handleChange
+			}),
 			React.createElement(
 				'div',
 				{ className: 'checkbox' },
 				React.createElement(
 					'label',
 					null,
-					React.createElement('input', { type: 'checkbox', checked: this.props.inStockOnly }),
+					React.createElement('input', {
+						type: 'checkbox',
+						checked: this.props.inStockOnly,
+						ref: 'inStockOnlyInput',
+						onChange: this.handleChange
+					}),
 					' ',
 					' ',
 					' Only show products in stock'
@@ -216,12 +231,26 @@ var FilterableProductTable = React.createClass({
 			inStockOnly: false
 		};
 	},
+	handleUserInput: function (filterText, inStockOnly) {
+		this.setState({
+			filterText: filterText,
+			inStockOnly: inStockOnly
+		});
+	},
 	render: function () {
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(SearchBar, { filterText: this.state.filterText, inStockOnly: this.state.inStockOnly }),
-			React.createElement(ProductTable, { products: this.props.products, filterText: this.state.filterText, inStockOnly: this.state.inStockOnly })
+			React.createElement(SearchBar, {
+				filterText: this.state.filterText,
+				inStockOnly: this.state.inStockOnly,
+				onUserInput: this.handleUserInput
+			}),
+			React.createElement(ProductTable, {
+				products: this.props.products,
+				filterText: this.state.filterText,
+				inStockOnly: this.state.inStockOnly
+			})
 		);
 	}
 });
